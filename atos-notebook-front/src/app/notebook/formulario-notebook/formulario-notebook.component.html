@@ -1,0 +1,73 @@
+
+<div class="card border-dark mb-3">
+  <div class="card-header"> {{titulo}} </div>
+  <div class="card-body">
+    <form #notebookForm="ngForm">
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-2">Titulo</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="notebooks.title" name="titulo"  #title="ngModel" required="true" >
+          <div class="alert alert-danger" *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div *ngIf="title.errors?.['required']">
+              Este campo es obligatorio
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-2">Descripcion</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="notebooks.content" name="content" #content="ngModel" required="true" >
+          <div class="alert alert-danger" *ngIf="content.invalid && (content.dirty || content.touched)">
+            <div *ngIf="content.errors?.['required']">
+              Este campo es obligatorio
+            </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-2">objetivos</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="notebooks.description" name="descripcion" #description="ngModel" required="true" >
+          <div class="alert alert-danger" *ngIf="description.invalid && (description.dirty || description.touched)">
+            <div *ngIf="description.errors?.['required']">
+              Este campo es obligatorio
+            </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-2">Iniciativa</label>
+        <div class="col-sm-6">
+         <select [(ngModel)]="idSelect" name="seleccionador">
+           <option *ngFor="let iniciativa of iniciativas" [value]="iniciativa.id">{{iniciativa.title}}</option>
+         </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+
+          <div class="navbar navbar-expand-lg navbar-light">
+
+            <div class="container-fluid">
+
+              <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!notebooks.id else elseBlock" [disabled]="!notebookForm.form.valid">Crear</button>
+          <ng-template #elseBlock>
+               <button class="btn btn-primary" role="button" (click)="update()" [disabled]="!notebookForm.form.valid">Editar</button>
+
+          </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+

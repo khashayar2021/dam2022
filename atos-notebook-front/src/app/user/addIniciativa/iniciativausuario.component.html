@@ -1,0 +1,26 @@
+
+<div class="card border-dark mb-3">
+  <div class="card-header"> Inscribir Usuario {{usuario.name}} {{usuario.surName}} en iniciativa</div>
+  <div class="card-body">
+  <form #usuarioIniciativa="ngForm">
+<table>
+<thead>
+  <tr>
+    <th>
+      Seleccionar iniciativa
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    <td>
+      <select id="iniciativasSelect" multiple [(ngModel)]="idSelect" name="seleccionador" [ngModelOptions]="{standalone: true}">
+      <option *ngFor="let iniciativa of iniciativas" [value]="iniciativa.id">{{iniciativa.title}}
+      </option>
+      </select>
+    </td>
+  </tbody>
+  </table>
+  <br>
+    <button type="button" name="eliminar" (click)="addIniciativa()" class="btn btn-primary">Añadir Iniciativa</button>
+</form>
+

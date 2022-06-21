@@ -1,0 +1,45 @@
+<div class="ui-g-12" style="width: 100%">
+  <p-panel header="Administracion de Notebooks"  style="width: 100%;">
+    <div style="margin-bottom: 20px">
+      <p-menubar [model]="items">
+        <div class="col-12 md:col-4">
+          <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+              <input pInputText
+              type="text"
+              (input)="
+                todoTable.filterGlobal($any($event.target).value, 'contains')
+              " placeholder="Filtro General"/>
+          </div>
+        </div>
+      </p-menubar>
+
+    </div>
+
+    <p-table #todoTable  [value]="notebooks" [columns]="cols" [responsive]="true" selectionMode="single"  sortMode="multiple" [(selection)]="selectedNotebook"
+    dataKey="id" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,25]" [filterDelay]="0" [globalFilterFields]="['title', 'content', 'description']">
+
+      <ng-template pTemplate="header" let-columns>
+
+        <tr >
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+
+
+
+      </ng-template>
+
+      <ng-template pTemplate="body" let-notebooks let-columns="columns">
+        <tr [pSelectableRow]="notebooks">
+          <td *ngFor="let col of columns">
+            {{ notebooks[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+
+</div>

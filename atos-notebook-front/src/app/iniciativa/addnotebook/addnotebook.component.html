@@ -1,0 +1,37 @@
+
+<div class="card border-dark mb-3">
+  <div class="card-header"> Insertar Notebook en iniciativa </div>
+  <div class="card-body">
+    <div *ngIf="notebooksIn.length > 0">
+      Esta Iniciativa contiene los siguientes Notebook:
+      <ul *ngFor="let notebookin of notebooksIn">
+        <li>{{notebookin.title}}</li>
+      </ul>
+    </div>
+    <div *ngIf="notebooksIn.length === 0">
+      No dispone de iniciativas
+    </div>
+  <form #notebookIniciativa="ngForm">
+
+<table>
+<thead>
+  <tr>
+    <th>
+      Seleccionar notebook
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+
+    <td>
+      <select id="notebookSelect" multiple [(ngModel)]="idSelect" name="seleccionador" [ngModelOptions]="{standalone: true}">
+      <option *ngFor="let notebook of notebooks" [value]="notebook.id">{{notebook.title}}
+      </option>
+      </select>
+    </td>
+  </tbody>
+  </table>
+  <br>
+    <button type="button" name="eliminar" (click)="addNotebook()" class="btn btn-primary">Añadir Iniciativa</button>
+</form>
+

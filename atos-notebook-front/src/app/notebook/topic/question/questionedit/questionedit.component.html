@@ -1,0 +1,65 @@
+
+<div class="card bg-light mb-3">
+  <div class="card-header">Pregunta</div>
+  <div class="card-body">
+  <form #questionForm="ngForm">
+    <div class="form-group row pt-2 ml-2">
+      <label for="" class="col-form-label col-md-3">Introduce una pregunta</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" [(ngModel)]="question.question" name="question" #color="ngModel" required="true" minlength="4">
+        <div class="alert alert-danger" *ngIf="color.invalid && (color.dirty || color.touched)">
+          <div *ngIf="color.errors?.['required']">
+            Escribe algo!!!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row pt-2 ml-2">
+      <label for="" class="col-form-label col-md-3">Elige el tipo del texto</label>
+      <div class="col-9">
+        <select class="form-select" name="type" #type="ngModel" [(ngModel)]="question.type">
+          <option value="Pregunta" selected>Pregunta</option>
+          <option value="Imagen">Imagen</option>
+          <option value="Enlace">Enlace</option>
+          <option value="Comentario">Comentario</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row pt-2 ml-2">
+      <label for="" class="col-form-label col-md-3">Elige el color del texto</label>
+      <div class="col-md-9">
+        <p-colorPicker name="color" #color="ngModel" [(ngModel)]="question.color " [showTransitionOptions]="'.12s cubic-bezier(0, 0, 0.2, 1)'" [hideTransitionOptions]="'.1s linear'"  > </p-colorPicker>
+      </div>
+    </div>
+
+    <div class="form-group row pt-2 ml-2">
+      <label for="" class="col-form-label col-md-3">Elige el tamaño del texto</label>
+      <div class="col-9">
+        <select class="form-select" name="size" #size="ngModel" [(ngModel)]="question.size">
+          <option value="12px" selected>12px</option>
+          <option value="18px">18px</option>
+          <option value="24px">24px</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row pt-2 ml-2">
+      <label for="" class="col-form-label col-md-3">Necesita un fichero <input type="checkbox" name=file  #file="ngModel" [(ngModel)]="question.file"></label>
+    </div>
+
+               <button class="btn btn-primary" role="button" (click)="update()" [disabled]="!questionForm.form.valid">Editar</button>
+    <div class="float-right">
+
+
+              </div>
+
+  </form>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,228 @@
+<div class="card border-dark mb-3">
+  <div class="card-header" *ngIf="!usuario">{{ titulo }}</div>
+  <div class="card-header" *ngIf="usuario">{{ titulo2 }}</div>
+  <div class="card-body">
+    <form #usuarioForm="ngForm">
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">Nombre</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="usuario.name"
+            name="nick"
+            #nombre="ngModel"
+            required="true"
+            minlength="4"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+          >
+            <div *ngIf="nombre.errors?.['required']">El nick es requerido</div>
+            <div *ngIf="nombre.errors?.['minlength']">
+              El nick debe ser mayor a 3 letras
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">Apellido</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="usuario.surName"
+            name="apellido"
+            #apellido="ngModel"
+            required="true"
+            minlength="4"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
+          >
+            <div *ngIf="apellido.errors?.['required']">
+              El apellido es obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2 pb-2">
+        <label for="" class="col-form-label col-sm-3">Email</label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="usuario.email"
+            name="mail"
+            #mail="ngModel"
+            required="true"
+            minlength="4"
+            email
+          />
+
+          <div
+            class="alert alert-danger"
+            *ngIf="mail.invalid && (mail.dirty || mail.touched)"
+          >
+            <div *ngIf="mail.errors?.['required']">El email es requerido</div>
+            <div *ngIf="mail.errors?.['email']">
+              Introduce una dirección de correo eléctronico correcta
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2 pb-2">
+        <label for="" class="col-form-label col-sm-3">DAS</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="usuario.das"
+            name="das"
+            #das="ngModel"
+            required="true"
+            minlength="4"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="das.invalid && (das.dirty || das.touched)"
+          >
+            <div *ngIf="das.errors?.['required']">El das es obligatorio</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2 pb-2">
+        <label for="" class="col-form-label col-sm-3">Grupo</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="usuario.projectGroup"
+            name="grupo"
+            #grupo="ngModel"
+            required="true"
+            minlength="4"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="grupo.invalid && (grupo.dirty || grupo.touched)"
+          >
+            <div *ngIf="grupo.errors?.['required']">
+              El grupo es obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row pb-2">
+        <label for="" class="col-form-label col-sm-3">ROL</label>
+        <div class="col-sm-9">
+            <select class="form-select" name="rol" #type="ngModel" #rol="ngModel" [(ngModel)]="usuario.rol"
+            required="true">
+              <option value="ADMIN" selected>ADMIN</option>
+              <option value="GESTOR">GESTOR</option>
+              <option value="ALUMNO">ALUMNO</option>
+            </select>
+
+          <div
+            class="alert alert-danger"
+            *ngIf="rol.invalid && (rol.dirty || rol.touched)"
+          >
+            <div *ngIf="rol.errors?.['required']">el rol es necesario</div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="usuario.id">
+        <div class="form-group row pb-2">
+          <label for="" class="col-form-label col-sm-2">Contraseña</label>
+          <div class="col-sm-6">
+            <input
+              type="password"
+              class="form-control"
+              [(ngModel)]="contrasena"
+              name="password"
+              #password="ngModel"
+              required="true"
+              minlength="4"
+            />
+            <div
+              class="alert alert-danger"
+              *ngIf="password.invalid && (password.dirty || password.touched)"
+            >
+              <div *ngIf="password.errors?.['required']">
+                La contraseña es requerida
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row pb-2">
+          <label for="" class="col-form-label col-sm-2"
+            >Confirmar Contraseña</label
+          >
+          <div class="col-sm-6">
+            <input
+              type="password"
+              class="form-control"
+              [(ngModel)]="usuario.password2"
+              name="password2"
+              #password2="ngModel"
+              required="true"
+            />
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                password2.invalid &&
+                compararContrasenia() &&
+                (password2.dirty || password2.touched)
+              "
+            >
+              <div *ngIf="compararContrasenia()">
+                Las contraseñas deben coincidir
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <div class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+              <button
+                class="btn btn-primary"
+                role="button"
+                (click)="create()"
+                *ngIf="!usuario.id; else elseBlock"
+                [disabled]="!usuarioForm.form.valid"
+              >
+                Crear
+              </button>
+
+              <ng-template #elseBlock>
+                <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)="update()"
+                  [disabled]="!usuarioForm.form.valid"
+                >
+                  Editar
+                </button>
+              </ng-template>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

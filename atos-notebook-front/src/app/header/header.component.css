@@ -1,0 +1,17 @@
+.logo{
+  padding-right: 10px;
+}
+.navbar{
+  background-color: #0065A7;
+  color: bisque;
+  text-decoration: none;
+}
+a{
+  color: white;
+}
+a:hover{
+  color:gray
+}
+.dropdown-item{
+  color:black
+}

@@ -1,0 +1,74 @@
+<div class="container  row col-sm-12">
+
+  <div class="col-sm-12" >
+    <div class="col-sm-12 ">
+      <div class="card bg-light mb-3  row col-sm-12">
+
+          <div class="card-body bg-light mb-3 " *ngIf="notebook">
+            <h1 class="text-center">{{notebook.title}}</h1>
+
+            <h3>Contenido</h3>
+
+            <div><p>{{notebook.description}}</p></div>
+            <h3>Objetivo</h3>
+
+            <div><p>{{notebook.content}}</p></div>
+
+
+
+
+            </div>
+              <div>
+                <div class="example-box" *ngFor="let question of questions,let i=index ">
+
+                  <div class="preguntas">
+                    <article class="postcard light blue">
+                      <div class="postcard__text t-dark">
+                        <h1 class="postcard__title blue" *ngIf="question.type==='Pregunta'">{{question.question}}</h1>
+                        <div *ngIf="question.file===true">
+                        </div>
+                        <div *ngIf="question.type==='Imagen'">
+                          <img src="{{question.question}}" width="100%" height="200px">
+                          <div *ngIf="answers[i]">
+                          </div>
+                        </div>
+                        <div class="postcard__bar" *ngIf="question.type!=='Imagen'"></div>
+                        <div class="postcard__preview-txt" >
+                          <div class="form-group">
+                            <div *ngIf="answers[i]"> <!-- src="{{answers[i].urlFile}}" -->
+                              <a href="http://localhost:8080/download/{{answers[i].id}}" download="">{{answers[i].answer}} </a>
+                              <!-- <a src="checkUrl({{answers[i].urlFile}})" >{{answers[i].updateFile}}</a> -->
+                              <div class="d-flex justify-content-center mt-3">
+
+                              <ngb-rating [max]="10" [(ngModel)]="answers[i].nota" (ngModelChange)="setValue($event, answers[i])"></ngb-rating>
+                                <p>Nota: {{answers[i].nota}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    </article>
+                </div>
+              </div>
+
+            </div>
+            <div class="row text-center">
+              <div *ngIf="mostrarNota===false">
+                <button (click)="calcularMedia()">Mostrar Media</button>
+              </div>
+
+              <div *ngIf="mostrarNota===true">
+                <p-knob [(ngModel)]="media" [readonly]="true" [max]="10"></p-knob>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+  </div>
+
+</div>
+

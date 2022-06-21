@@ -1,0 +1,78 @@
+
+<div *ngIf="modal" class="modal" tabindex="-1" role="dialog" style="display: block; ">
+  <div class="modal-dialog modal-dialog-centered"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" (click)="cerrarModal()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body row align-items-center">
+        <div class="col-md-5 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <a (click)="abrirModal()">
+              <img *ngIf="user?.foto" src="http://localhost:8080/uploads/img/{{user.foto}}" alt="{{user.foto}}" class="img-thumbnail rounded" style="width:250px; height: 250px;">
+            </a>
+            <a (click)="abrirModal()">
+            <img *ngIf="!user?.foto" src="http://localhost:8080/img/no_usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+            style="width: 150px; cursor: pointer; ">
+            </a>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+          <p >¿Deseas cambiar de foto de perfil?</p>
+          <label class="custom-file-upload">
+            <input (change)="getFoto($event)" accept="image/*" type="file"/>
+            Elegir foto de perfil
+        </label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+      <div class="col-md-4 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <a (click)="abrirModal()"><img *ngIf="user?.foto" src="http://localhost:8080/uploads/img/{{user.foto}}" alt="{{user.foto}}" class="img-thumbnail rounded" style="width:25%">
+            </a><img *ngIf="!user?.foto" src="http://localhost:8080/img/no_usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+            style="width: 150px; cursor: pointer; ">
+            <span class="font-weight-bold">{{user.name}}</span><span class="text-black-50">{{user.emailAtos}}</span><span> </span></div>
+      </div>
+
+
+      <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Perfil</h4>
+              </div>
+              <form #usuarioForm="ngForm">
+              <div class="row mt-2">
+                  <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" placeholder="Nombre" value="" [(ngModel)]="user.name" name="nombre" #nombre="ngModel"></div>
+                  <div class="col-md-6"><label class="labels">Apellido</label><input type="text" class="form-control" value="" placeholder="Apellido" [(ngModel)]="user.surName" name="apellido" #apellido="ngModel"></div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12"><label class="labels">Contraseña</label><input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="contrasena" name="password" #password="ngModel"></div>
+                <div class="col-md-12"><label class="labels">DAS</label><input type="text" class="form-control" placeholder="DAS" [(ngModel)]="user.das" name="das" #das="ngModel" disabled></div>
+                  <div class="col-md-12"><label class="labels">Número de teléfono</label><input type="text" class="form-control" placeholder="Teléfono" [(ngModel)]="user.phone" name="phone" #phone="ngModel"></div>
+                  <div class="col-md-12"><label class="labels">Dirección</label><input type="text" class="form-control" placeholder="Dirección" [(ngModel)]="user.location" name="location" #location="ngModel"></div>
+                  <div class="col-md-12"><label class="labels">Centro Escolar</label><input type="text" class="form-control" placeholder="Centro Escolar" [(ngModel)]="user.trainingCenter" name="trainingCenter" #trainingCenter="ngModel"></div>
+
+                  <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="email personal" [(ngModel)]="user.email" name="email" #email="ngModel"></div>
+                  <div class="col-md-12"><label class="labels">Email ATOS</label><input type="text" class="form-control" placeholder="email ATOS" [(ngModel)]="user.emailAtos" name="emailAtos" #emailAtos="ngModel" disabled></div>
+                  <div class="col-md-12"><label class="labels">Profesor</label><input type="text" class="form-control" placeholder="profesor" [(ngModel)]="user.teacher" name="teacher" #teacher="ngModel" disabled></div>
+              </div>
+
+              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="updatePerfil()">Guardar Cambios</button></div>
+            </form>
+            </div>
+      </div>
+
+  </div>
+</div>
+
+

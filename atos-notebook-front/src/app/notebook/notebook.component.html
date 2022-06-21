@@ -1,0 +1,53 @@
+<div class="container row">
+
+  <div class="col-sm-12" >
+    <div class="col-sm-12 ">
+
+      <div class="card bg-light mb-3  row col-sm-12">
+        <div class="card-header">Contenido de notebook</div>
+          <div class="card-body bg-light mb-3 " >
+            <button pButton type="button" name="preguntas" [routerLink]="['/preguntas/',notebook.id]" class="p-button-raised p-button-rounded mb-3" style="width: 25%;">Añadir Preguntas</button>
+            <h1 class="text-center">{{notebook.title}}</h1>
+
+            <h3>Contenido</h3>
+
+            <div><p>{{notebook.description}}</p></div>
+            <h3>Objetivo</h3>
+
+            <div><p>{{notebook.content}}</p></div>
+
+            </div>
+              <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let question of questions " cdkDrag>
+
+                  <div class="preguntas">
+                    <div class="icon row text-center"><i class="pi pi-list"></i></div>
+                    <div *ngIf="question.type==='Pregunta'" style="margin:20px">
+                    <p style="color:{{question.color}}; font-size:{{question.size}};"> {{question.question}}</p>
+                    <div class="form-group">
+
+                    </div>
+                    <div *ngIf="question.file===true">
+                    </div>
+                  </div>
+
+                  <div *ngIf="question.type==='Enlace'">
+                    <li><a style="color:{{question.color}}; font-size:{{question.size}};"> {{question.question}}</a></li>
+                  </div>
+
+                  <div *ngIf="question.type==='Comentario'">
+                    <a  style="color:{{question.color}}; font-size:{{question.size}};"> {{question.question}}</a>
+                  </div>
+
+                  <div *ngIf="question.type==='Imagen'">
+                    <img src="{{question.question}}" alt="error" width="100%" height="200">
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+
+

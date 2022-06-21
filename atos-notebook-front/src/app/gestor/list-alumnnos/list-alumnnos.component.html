@@ -1,0 +1,85 @@
+
+<div class="ui-g-12" style="width: 100%">
+  <p-panel header="Lista de alumnos" style="width: 100%" *ngIf="users && users.length > 0 ">
+    <div style="margin-bottom: 20px">
+      <p-menubar [model]="items">
+        <div class="col-12 md:col-4">
+          <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+              <input pInputText
+              type="text"
+              (input)="
+                todoTable.filterGlobal($any($event.target).value, 'contains')
+              "/>
+          </div>
+      </div>
+
+      </p-menubar>
+    </div>
+    <p-table
+      #todoTable
+      [value]="users"
+      [columns]="cols"
+      [responsive]="true"
+      selectionMode="single"
+      sortMode="multiple"
+      [(selection)]="selectedUser"
+      dataKey="id"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      [filterDelay]="0"
+      [globalFilterFields]="[
+        'das',
+        'name',
+        'surName',
+        'projectGroup',
+        'email',
+        'trainingCenter',
+        'createAt'
+      ]"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>
+            <p-columnFilter
+              type="text"
+              field="projectGroup"
+              placeholder="Grupo"
+            ></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter
+              type="text"
+              field="trainingCenter"
+              placeholder="Centro"
+            ></p-columnFilter>
+          </th>
+          <th>
+            <button type="button" pButton pRipple icon="pi pi-file-o" (click)="todoTable.exportCSV()" class="p-mr-2" pTooltip="Exportar CSV" tooltipPosition="bottom"></button>
+          </th>
+        </tr>
+
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-user let-columns="columns">
+        <tr [pSelectableRow]="user">
+          <td *ngFor="let col of columns">
+            {{ user[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+
+  <div class="alert alert-info my-4" *ngIf="users.length == 0">
+    No tienes alumnos asignados
+  </div>
+
+</div>

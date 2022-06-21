@@ -1,0 +1,59 @@
+
+
+<div class="container row col-sm-12">
+  <div class="col-sm-3">
+    <div class="card text-dark bg-light mb-3">
+      <div class="card-header">Notebook</div>
+      <div class="card-body">
+         <p class="card-text">
+          <button pButton type="button" onclick="history.back()" label="Volver"  class="p-button-outlined p-button-rounded p-button-danger"></button>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8" *ngIf="question" >
+    <div class="col-sm-12">
+      <div class="card bg-light mb-3  row col-sm-30"   style="max-width: 45rem;" >
+        <div class="card-body bg-light mb-3 " >
+          <h1 class="text-center">{{question.question}}</h1>
+
+          <form [formGroup]="formulario" (ngSubmit)="enviarRespuesta()" *ngIf="!question.file">
+            <div *ngIf="question.file == null" class="form-group">
+              <label for="exampleFormControlTextarea1">Respuesta</label>
+              <textarea formControlName="respuesta" class="form-control" id="FormControlTextarea1" rows="10" value="{{answer.answer}}"></textarea>
+            </div>
+
+            <div style="margin-top: 20px; position: relative; left: 90%;">
+              <button pButton type="submit" icon="pi pi-check" class="p-element p-ripple p-button-rounded p-button-outlined p-button p-component p-button-icon-only"></button>
+            </div>
+          </form>
+
+          <form [formGroup]="formulario" (ngSubmit)="enviarArchivo()" *ngIf="question.file">
+            <div *ngIf="question.file == null" class="form-group">
+              <label for="exampleFormControlTextarea1">Respuesta</label>
+              <textarea formControlName="respuesta" class="form-control" id="FormControlTextarea1" rows="10" value="{{answer.answer}}"></textarea>
+            </div>
+            <div *ngIf="question.file == true">
+              <br>
+              <p class="text-center">Deberás de entregar un archivo para esta pregunta</p>
+              <br>
+              <div class="form-group">
+                <label for="ejemplo_archivo_1">Adjuntar un archivo *.zip</label>
+                <input (change)="capturarFile($event)" accept=".zip" type="file" id="ejemplo_archivo_1">
+              </div>
+            </div>
+
+            <div style="margin-top: 20px; position: relative; left: 90%;">
+              <button pButton type="submit" icon="pi pi-check" class="p-element p-ripple p-button-rounded p-button-outlined p-button p-component p-button-icon-only"></button>
+            </div>
+
+          </form>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,47 @@
+
+<div class="ui-g-12">
+  <p-panel header="Administracion de Iniciativas">
+    <div style="margin-bottom: 20px">
+      <p-menubar [model]="items">
+        <div class="col-12 md:col-4">
+          <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+              <input pInputText
+              type="text"
+              (input)="
+                todoTable.filterGlobal($any($event.target).value, 'contains')
+              " placeholder="Filtro General"/>
+          </div>
+        </div>
+      </p-menubar>
+    </div>
+    <p-table #todoTable  [value]="iniciativas" [columns]="cols" [responsive]="true" selectionMode="single"  sortMode="multiple" [(selection)]="selectedIniciativa"
+    dataKey="id" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,25]" [filterDelay]="0" [globalFilterFields]="['title', 'description', 'starDate', 'endDate']">
+
+      <ng-template pTemplate="header" let-columns>
+
+        <tr >
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+
+
+
+      </ng-template>
+
+      <ng-template pTemplate="body" let-iniciativa let-columns="columns">
+        <tr [pSelectableRow]="iniciativa">
+          <td *ngFor="let col of columns">
+            {{ iniciativa[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div style="margin-bottom: 20px " >
+      <p-menubar [model]="items2" style="float: right; position: relative ;bottom: 23px" ></p-menubar>
+    </div>
+  </p-panel>
+
+</div>
